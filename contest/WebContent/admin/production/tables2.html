@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>后台管理</title>
+
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+	<script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom.min.css" rel="stylesheet">
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              <a href="form.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile clearfix">
+              <div class="profile_pic">
+                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+              </div>
+              <div class="profile_info">
+                <span>欢迎,</span>
+                <h2>管理员</h2>
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+              <div class="menu_section">
+                <h3>管理</h3>
+                <ul class="nav side-menu">
+                  
+                  <li><a><i class="fa fa-edit"></i> 赛事管理 <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="form.html">提交赛事</a></li>
+                      <li><a href="tables.html">审核列表</a></li>
+                      <li><a href="tables2.html">删除审核列表</a></li>
+                      <!--<li><a href="form_buttons.html">Form Buttons</a></li>-->
+                    </ul>
+                  </li>
+                  
+                </ul>
+              </div>
+            </div>
+            <!-- /sidebar menu -->
+
+            
+          </div>
+        </div>
+
+        
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <div class="title_left">
+                <h3>删除列表界面</h3>
+              </div>
+
+              
+            </div>
+
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12" >
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>删除列表</h2>
+                    
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>赛事名称</th>
+                          <th>赛事logo</th>
+                          <th>起始时间</th>
+                          <th>截止时间</th>
+                          <th>注册时间</th>
+                          <th>注册截止时间</th>
+                          <th>赛事信息</th>
+                          <th>参赛要求</th>
+                          <th>赛事奖励</th>
+                          <th>举办平台</th>
+                        </tr>
+                      </thead>
+                      <tbody id="datas">
+                        
+                        
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        
+        <!-- /footer content -->
+      </div>
+    </div>
+	<script type="text/javascript">
+	
+	function getQueryString(name){		
+		var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");		
+		var r = window.location.search.substr(1).match(reg);		
+		if(r!=null)return  unescape(r[2]); return null;		
+	}
+		$(document).ready(function(){
+			
+			$.post("contestMana2.action",{"key":""},function(data){
+				var i;
+				var edata=eval(data);
+				for(i=0;i<edata.length;i++){
+					$("<tr><th scope='row'>"+edata[i].name+"</th><td><img src='"+edata[i].logo+"'></td><td>"+edata[i].conteststartdate+"</td><td>"+edata[i].contestenddate+"</td><td>"+edata[i].registrationstartdate+"</td><td>"+edata[i].registrationenddate+"</td><td>"+edata[i].content+"</td><td>"+edata[i].claim+"</td><td>"+edata[i].reward+"</td><td>"+edata[i].platform+"</td></tr>").appendTo("#datas");
+				}
+			},"json");
+		});
+	</script>
+    <!-- jQuery -->
+    
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"></script>
+    <!-- iCheck -->
+    <script src="../vendors/iCheck/icheck.min.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
+  </body>
+</html>

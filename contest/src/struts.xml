@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	
+	<package name="szh" extends="struts-default">
+
+        <global-results>
+            
+            <result name="suc">/common/suc.jsp</result>
+        </global-results>
+        <action name="contestAdd" class="action.AdminAction" method="contestAdd">	
+        </action>
+        <action name="contestMana" class="action.AdminAction" method="contestMana">	
+        </action>
+        <action name="contestDel" class="action.AdminAction" method="contestDel">	
+        </action>
+        <action name="contestEdit" class="action.AdminAction" method="contestEdit">	
+        </action>
+        <action name="contestMana2" class="action.AdminAction" method="contestMana2">	
+        </action>
+    </package>
+    
+</struts>    
