@@ -120,37 +120,58 @@
                     <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">赛事名称<span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >赛事名称<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="name" type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+                          <input  type="text" id="title" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">赛事LOGO<span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >举办方<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="logo" type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="sponsor" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">起始时间 <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >海报<span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="contestStartDate" class="date-picker form-control col-md-7 col-xs-12 laydate-icon" onclick="laydate()" readonly="readonly" required="required" type="text">
+                          <input type="text" id="poster" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">截止时间 <span class="required">*</span>
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" >比赛起始时间 <span class="required">*</span>
+                      </label>
+                      <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input id="contestStartDate" class="date-picker form-control col-md-7 col-xs-12 laydate-icon" onclick="laydate()" readonly="readonly" required="required" type="text">
+                      </div>
+                    </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">比赛结束时间
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input id="contestEndDate" class="date-picker form-control col-md-7 col-xs-12 laydate-icon" onclick="laydate()" readonly="readonly" required="required" type="text">
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">赛事信息描述</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >报名起始时间 <span class="required">*</span>
+                        </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="content" class="form-control col-md-7 col-xs-12" type="text" name="middle-name" style="height: 100px;">
+                          <input id="registrationStartDate" class="date-picker form-control col-md-7 col-xs-12 laydate-icon" onclick="laydate()" readonly="readonly" required="required" type="text">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" >报名截止时间 <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="registrationEndDate" class="date-picker form-control col-md-7 col-xs-12 laydate-icon" onclick="laydate()" readonly="readonly" required="required" type="text">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label  class="control-label col-md-3 col-sm-3 col-xs-12">赛事正文</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="body" class="form-control col-md-7 col-xs-12" type="text" name="middle-name" style="height: 100px;">
                         </div>
                       </div>
                       
@@ -184,17 +205,29 @@
     </div>
 	<script type="text/javascript">
 		function check(){
-			var name=$("#name").val();
-			var logo=$("#logo").val();
+			var title=$("#title").val();
+			var sponsor=$("#sponsor").val();
+			var poster=$("#poster").val();
 			var contestStartDate=$("#contestStartDate").val();
 			var contestEndDate=$("#contestEndDate").val();
-			var content=$("#content").val();
-			$.post("contestAdd.action",{"name":name,"logo":logo,"contestStartDate":contestStartDate,"contestEndDate":contestEndDate,"content":content},function(data){
-				if(data.code==0){
-					alert("添加赛事成功");
-					window.location.href="tables.html";
-				}
-			},"json");
+            var registrationStartDate=$("#registrationStartDate").val();
+            var registrationEndDate=$("#registrationEndDate").val();
+			var body=$("#body").val();
+            $.ajax({
+                type: 'POST',
+                url: "http://118.25.41.237:8080/news/add",
+                data: JSON.stringify({"title":title,"sponsor":sponsor,"poster":poster,
+                    "contestStartDate":contestStartDate,"contestEndDate":contestEndDate,
+                    "registrationStartDate":registrationStartDate,"registrationEndDate":registrationEndDate,
+                    "body":body}),
+                contentType:"application/json",
+                dataType: "json",
+                success: function(text){
+                    alert(JSON.stringify(text));
+                }
+
+            });
+
 		}
 	</script>
     <!-- jQuery -->
